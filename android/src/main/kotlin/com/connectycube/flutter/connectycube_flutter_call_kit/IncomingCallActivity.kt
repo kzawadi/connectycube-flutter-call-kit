@@ -7,12 +7,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,7 +23,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.bumptech.glide.Glide
 import com.connectycube.flutter.connectycube_flutter_call_kit.utils.getPhotoPlaceholderResId
 import com.google.android.material.imageview.ShapeableImageView
-import com.skyfishjy.library.RippleBackground
+// import com.skyfishjy.library.RippleBackground
 
 
 fun createStartIncomingScreenIntent(
@@ -57,6 +59,16 @@ class IncomingCallActivity : Activity() {
         super.onCreate(savedInstanceState)
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         setContentView(resources.getIdentifier("activity_incoming_call", "layout", packageName))
+
+        // Make the status bar transparent
+        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+
+        // Hide the navigation bar
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+//            window.insetsController?.hide(WindowInsets.Type.navigationBars())
+//        }
+
+        setContentView(R.layout.activity_incoming_call)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
             setShowWhenLocked(true)
@@ -166,7 +178,7 @@ class IncomingCallActivity : Activity() {
         val callSubTitleTxt: TextView =
             findViewById(resources.getIdentifier("call_type_txt", "id", packageName))
         callSubTitleTxt.text =
-            String.format(CALL_TYPE_PLACEHOLDER, if (callType == 1) "Video" else "Audio")
+            String.format(CALL_TYPE_PLACEHOLDER)
 
         val callAcceptButton: ImageView =
             findViewById(resources.getIdentifier("start_call_btn", "id", packageName))
@@ -193,14 +205,6 @@ class IncomingCallActivity : Activity() {
         } else {
             avatarImg.setImageResource(defaultPhotoResId)
         }
-
-        val acceptButtonAnimation: RippleBackground =
-            findViewById(resources.getIdentifier("accept_button_animation", "id", packageName))
-        acceptButtonAnimation.startRippleAnimation()
-
-        val rejectButtonAnimation: RippleBackground =
-            findViewById(resources.getIdentifier("reject_button_animation", "id", packageName))
-        rejectButtonAnimation.startRippleAnimation()
     }
 
     // calls from layout file
