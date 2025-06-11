@@ -190,21 +190,22 @@ class IncomingCallActivity : Activity() {
                 packageName
             )
         )
+//todo  because we dont show avatar in incoming call
 
-        val avatarImg: ShapeableImageView =
-            findViewById(resources.getIdentifier("avatar_img", "id", packageName))
+//        val avatarImg: ShapeableImageView =
+//            findViewById(resources.getIdentifier("avatar_img", "id", packageName))
 
-        val defaultPhotoResId = getPhotoPlaceholderResId(applicationContext)
-
-        if (!TextUtils.isEmpty(callPhoto)) {
-            Glide.with(applicationContext)
-                .load(callPhoto)
-                .error(defaultPhotoResId)
-                .placeholder(defaultPhotoResId)
-                .into(avatarImg)
-        } else {
-            avatarImg.setImageResource(defaultPhotoResId)
-        }
+//        val defaultPhotoResId = getPhotoPlaceholderResId(applicationContext)
+//
+//        if (!TextUtils.isEmpty(callPhoto)) {
+//            Glide.with(applicationContext)
+//                .load(callPhoto)
+//                .error(defaultPhotoResId)
+//                .placeholder(defaultPhotoResId)
+//                .into(avatarImg)
+//        } else {
+//            avatarImg.setImageResource(defaultPhotoResId)
+//        }
     }
 
     // calls from layout file
